@@ -1,0 +1,9 @@
+.header {
+    grid-area: header;
+    background: url('../../images/Wooden_texture.jpg')
+}
+
+.header img {
+    width: 130px;
+    padding: 15px;
+}

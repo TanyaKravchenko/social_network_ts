@@ -1,0 +1,15 @@
+.nav {
+    grid-area: nav;
+    background-color: #42413d;
+    padding: 15px;
+    font-size: 22px;
+}
+
+.item a{
+    color: blanchedalmond;
+    text-decoration: none;
+}
+
+.item a.active {
+    color: goldenrod;
+}
