@@ -13,3 +13,7 @@
 .item a.active {
     color: goldenrod;
 }
+
+.itemFriends {
+    margin-top: 80px;
+}

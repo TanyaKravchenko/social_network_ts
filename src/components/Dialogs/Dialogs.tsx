@@ -1,37 +1,46 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import classes from './Dialogs.module.css'
+import {DialogsPageType} from '../redux/state';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 
-const Dialogs = () => {
-    let dialogs = [
-        {id: 1, name: 'Dimych'},
-        {id: 2, name: 'Sveta'},
-        {id: 3, name: 'Valera'},
-        {id: 4, name: 'Victor'},
-        {id: 5, name: 'Sasha'},
-        {id: 6, name: 'Andrey'},
-    ]
+type DialogsPropsType = {
+    state: DialogsPageType
+    addNewPeopleMassages: () => void
+    newPeopleMessage: string
+    updateNewPeopleText: (newPeopleText:string) => void
+}
 
-    let messages = [
-        {id: 1, message: 'Hi!'},
-        {id: 2, message: 'Hello!'},
-        {id: 3, message: 'Yo'},
-        {id: 4, message: 'How are you?'},
-        {id: 5, message: 'Fine!'},
-        {id: 6, message: 'Ok'},
-    ]
+const Dialogs = (props: DialogsPropsType) => {
 
-    let messageElements = messages.map(m => <Message message={m.message} id={m.id}/>)
-    let dialogsElements = dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
+    let messageElements = props.state.messages.map(m => <Message message={m.message} id={m.id}/>)
+    let dialogsElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
+
+
+    let addNewPeopleMassages = () => {
+        props.addNewPeopleMassages();
+    }
+
+    let onChangePeopleText =  (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewPeopleText(e.currentTarget.value)
+    }
 
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>
                 {dialogsElements}
             </div>
-            <div>
+            <div className={classes.messages}>
                 {messageElements}
+            </div>
+            <div>
+                <textarea
+                value={props.newPeopleMessage}
+                onChange={onChangePeopleText}
+                />
+            </div>
+            <div>
+                <button onClick={addNewPeopleMassages}>Add post</button>
             </div>
         </div>
     );

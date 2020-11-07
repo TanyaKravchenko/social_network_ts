@@ -6,3 +6,10 @@
 .dialogsItems {
     padding: 10px;
 }
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px;
+}

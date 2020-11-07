@@ -1,3 +1,20 @@
+.dialogItem {
+    display: flex;
+    justify-content: flex-start;
+}
+
 .dialog {
-    padding: 10px;
+    padding: 15px;
+}
+
+.dialogItem .dialog {
+    display: flex;
+    align-items: center;
+}
+
+.dialogAvatar img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    margin: 10px;
 }

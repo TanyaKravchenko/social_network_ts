@@ -1,14 +1,9 @@
 import React from 'react';
 import classes from './Post.module.css'
 import post_image1 from '../../../../images/avatar1.png'
+import {PostType} from '../../../redux/state';
 
-type PostPropsType = {
-    message:string
-    likesCount: number
-    id: number
-}
-
-const Post = (props: PostPropsType) => {
+const Post = (props: PostType) => {
     return (
         <div className={classes.item}>
             <img src={post_image1}/>

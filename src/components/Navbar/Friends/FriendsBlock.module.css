@@ -1,0 +1,28 @@
+.headerFriends {
+    display: flex;
+    justify-content: center;
+    color: goldenrod;
+}
+
+.titleFriends {
+    padding-right: 15px;
+    font-weight: bold;
+}
+
+.friendAvatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+}
+
+.itemFriends {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+}
+
+.nameClass {
+    color: blanchedalmond;
+    font-size: 18px;
+    text-align: center;
+}

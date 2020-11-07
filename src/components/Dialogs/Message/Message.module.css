@@ -1,4 +1,34 @@
 .message {
     padding: 10px;
-    color: blanchedalmond;
+    color: #42413d;
+}
+
+.itemText {
+    width: 300px;
+    padding: 15px 10px;
+    position: relative;
+    background-color: honeydew;
+    border: 1px solid orange;
+    border-radius: 5px;
+}
+
+.itemText:after,
+.itemText:before {
+    content: "";
+    border: solid transparent;
+    position: absolute;
+    right: 100%;
+    top: 8px;
+}
+
+.itemText:after {
+    border-right-color: honeydew;
+    border-width: 8px;
+    margin-top: 0;
+}
+
+.itemText:before {
+    border-right-color: orange;
+    border-width: 9px;
+    margin-top: -1px;
 }
