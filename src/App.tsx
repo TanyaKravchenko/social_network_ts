@@ -19,7 +19,6 @@ type AppType = {
 }
 
 const App = (props: AppType) => {
-    debugger
     return (
         <div className="app-wrapper">
             <Header/>

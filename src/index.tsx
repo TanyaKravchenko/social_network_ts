@@ -1,13 +1,7 @@
 import React from 'react';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import state, {
-    addNewPeopleMassages,
-    addPost,
-    StateType, subscribe,
-    updateNewPeopleText,
-    updateNewPostText
-} from './components/redux/state';
+import store from './components/redux/state';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 import App from './App';
@@ -17,11 +11,11 @@ export let rerenderEntireTree = () => {
         <BrowserRouter>
             <React.StrictMode>
                 <App
-                    state={state}
-                    addPost={addPost}
-                    updateNewPostText={updateNewPostText}
-                    addNewPeopleMassages={addNewPeopleMassages}
-                    updateNewPeopleText={updateNewPeopleText}
+                    state={store.getState()}
+                    addPost={store.addPost.bind(store)}
+                    updateNewPostText={store.updateNewPostText.bind(store)}
+                    addNewPeopleMassages={store.addNewPeopleMassages.bind(store)}
+                    updateNewPeopleText={store.updateNewPeopleText.bind(store)}
                 />
             </React.StrictMode>
         </BrowserRouter>,
@@ -31,7 +25,7 @@ export let rerenderEntireTree = () => {
 
 rerenderEntireTree();
 
-subscribe(rerenderEntireTree)
+store.subscribe(rerenderEntireTree)
 
 
 // If you want your app to work offline and load faster, you can change
