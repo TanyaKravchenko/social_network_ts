@@ -40,15 +40,41 @@ export type StateType = {
     sidebar: SideBarType
 }
 
+export type AddPostActionType = {
+    type: 'ADD-POST'
+    newPostText: string
+}
+
+export type UpdateNewPostTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+
+export type AddNewPeopleMessageActionType = {
+    type: 'ADD-NEW-PEOPLE-MESSAGES'
+    newPeopleMessage: string
+}
+
+export type UpdateNewPeopleTextActionType = {
+    type: 'UPDATE-NEW-PEOPLE-TEXT'
+    newPeopleText: string
+}
+
+export type ActionsType =
+    | AddPostActionType
+    | UpdateNewPostTextActionType
+    | AddNewPeopleMessageActionType
+    | UpdateNewPeopleTextActionType
+
+
 export type StoreType = {
     _state: StateType
     getState: () => StateType
-    _callSubscriber: () =>void
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    _callSubscriber: () => void
     addNewPeopleMassages: () => void
     updateNewPeopleText: (newPeopleText: string) => void
     subscribe: (observer: () => void) => void
+    dispatch: (action: ActionsType) => void
 }
 
 let store: StoreType = {
@@ -88,27 +114,18 @@ let store: StoreType = {
             ]
         }
     },
+    _callSubscriber() {
+        console.log('XXX')
+    },
+
     getState() {
         return this._state
     },
-    _callSubscriber () {
-        console.log('XXX')
+    subscribe(observer: () => void) {
+        this._callSubscriber = observer;
     },
-    addPost () {
-        const newPost: PostType = {
-            id: 3,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber();
-    },
-    updateNewPostText (newText: string) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber();
-    },
-    addNewPeopleMassages () {
+
+    addNewPeopleMassages() {
         const newMessage: MessageType = {
             id: 3,
             message: this._state.dialogsPage.newPeopleMessage
@@ -117,12 +134,36 @@ let store: StoreType = {
         this._state.dialogsPage.newPeopleMessage = '';
         this._callSubscriber();
     },
-    updateNewPeopleText (newPeopleText: string) {
+    updateNewPeopleText(newPeopleText: string) {
         this._state.dialogsPage.newPeopleMessage = newPeopleText;
         this._callSubscriber();
     },
-    subscribe (observer: () => void) {
-        this._callSubscriber = observer;
+    dispatch(action) {
+        debugger
+        if (action.type === 'ADD-POST') {
+            const newPost: PostType = {
+                id: 3,
+                message: action.newPostText,
+                likesCount: 0
+            }
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber();
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber();
+        } else if (action.type === 'ADD-NEW-PEOPLE-MESSAGES') {
+            const newMessage: MessageType = {
+                id: 3,
+                message: action.newPeopleMessage
+            }
+            this._state.dialogsPage.messages.push(newMessage);
+            this._state.dialogsPage.newPeopleMessage = '';
+            this._callSubscriber();
+        } else if (action.type === 'UPDATE-NEW-PEOPLE-TEXT') {
+            this._state.dialogsPage.newPeopleMessage = action.newPeopleText;
+            this._callSubscriber();
+        }
     }
 }
 

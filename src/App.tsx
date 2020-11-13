@@ -8,14 +8,11 @@ import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import {StateType} from './components/redux/state';
+import store, {ActionsType, StateType} from './components/redux/state';
 
 type AppType = {
     state: StateType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    addNewPeopleMassages: () => void
-    updateNewPeopleText: (newPeopleText: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 const App = (props: AppType) => {
@@ -27,16 +24,13 @@ const App = (props: AppType) => {
                 <Route path='/profile' render={() =>
                     <Profile
                         state={props.state.profilePage}
-                        addPost={props.addPost}
-                        updateNewPostText={props.updateNewPostText}
+                        dispatch={store.dispatch.bind(store)}
                     />}
                 />
                 <Route path='/dialogs' render={() =>
                     <Dialogs
                         state={props.state.dialogsPage}
-                        addNewPeopleMassages={props.addNewPeopleMassages}
-                        newPeopleMessage={props.state.dialogsPage.newPeopleMessage}
-                        updateNewPeopleText={props.updateNewPeopleText}
+                        dispatch={store.dispatch.bind(store)}
                     />}
                 />
                 <Route path='/news' component={News}/>
