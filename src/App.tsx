@@ -8,7 +8,7 @@ import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import store, {ActionsType, StateType} from './components/redux/state';
+import {ActionsType, StateType} from './components/redux/store';
 
 type AppType = {
     state: StateType
@@ -24,13 +24,13 @@ const App = (props: AppType) => {
                 <Route path='/profile' render={() =>
                     <Profile
                         state={props.state.profilePage}
-                        dispatch={store.dispatch.bind(store)}
+                        dispatch={props.dispatch}
                     />}
                 />
                 <Route path='/dialogs' render={() =>
                     <Dialogs
                         state={props.state.dialogsPage}
-                        dispatch={store.dispatch.bind(store)}
+                        dispatch={props.dispatch}
                     />}
                 />
                 <Route path='/news' component={News}/>

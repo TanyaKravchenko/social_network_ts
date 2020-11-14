@@ -1,8 +1,9 @@
 import React, {ChangeEvent} from 'react';
 import classes from './Dialogs.module.css'
-import {ActionsType, DialogsPageType} from '../redux/state';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
+import {DialogsPageType, ActionsType} from '../redux/store';
+import { addNewPeopleMessagesAC, updateNewPeopleTextAC } from '../redux/dialogs-reducer';
 
 type DialogsPropsType = {
     state: DialogsPageType
@@ -13,18 +14,18 @@ type DialogsPropsType = {
 }
 
 const Dialogs = (props: DialogsPropsType) => {
-
+debugger
     let messageElements = props.state.messages.map(m => <Message message={m.message} id={m.id}/>)
-    let dialogsElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
+    let dialogsElements = props.state.dialogs.map(d => <DialogItem avatar={d.avatar} name={d.name} id={d.id}/>);
 
 
     let addNewPeopleMassages = () => {
-        props.dispatch ({type: 'ADD-NEW-PEOPLE-MESSAGES', newPeopleMessage: props.state.newPeopleMessage});
+        props.dispatch (addNewPeopleMessagesAC(props.state.newPeopleMessage));
     }
 
     let onChangePeopleText =  (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value;
-        props.dispatch ({type: 'UPDATE-NEW-PEOPLE-TEXT', newPeopleText: text })
+        props.dispatch (updateNewPeopleTextAC(text))
     }
 
     return (
