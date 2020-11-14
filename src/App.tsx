@@ -4,33 +4,28 @@ import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import {ActionsType, StateType} from './components/redux/store';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
+import {StoreType} from './components/redux/store';
 
 type AppType = {
-    state: StateType
-    dispatch: (action: ActionsType) => void
+    store: any
 }
 
 const App = (props: AppType) => {
     return (
         <div className="app-wrapper">
             <Header/>
-            <Navbar state={props.state.sidebar}/>
+            <Navbar state={props.store.getState().sidebar}/>
             <div className='app-wrapper-content'>
                 <Route path='/profile' render={() =>
-                    <Profile
-                        state={props.state.profilePage}
-                        dispatch={props.dispatch}
-                    />}
+                    <Profile store={props.store}/>}
                 />
                 <Route path='/dialogs' render={() =>
-                    <Dialogs
-                        state={props.state.dialogsPage}
-                        dispatch={props.dispatch}
+                    <DialogsContainer
+                        store={props.store}
                     />}
                 />
                 <Route path='/news' component={News}/>

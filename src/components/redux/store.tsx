@@ -60,8 +60,8 @@ export type ActionsType =
 
 export type StoreType = {
     _state: StateType
-    getState: () => StateType
     _callSubscriber: () => void
+    getState: () => StateType
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionsType) => void
 }
@@ -117,7 +117,7 @@ let store: StoreType = {
     dispatch(action) {
         //this._state.profilePage = profileReducer(this._state.profilePage, action);
         //this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
-        //this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
 
         this._callSubscriber();
     }

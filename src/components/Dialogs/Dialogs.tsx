@@ -2,30 +2,27 @@ import React, {ChangeEvent} from 'react';
 import classes from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-import {DialogsPageType, ActionsType} from '../redux/store';
-import { addNewPeopleMessagesAC, updateNewPeopleTextAC } from '../redux/dialogs-reducer';
+import {DialogsPageType} from '../redux/store';
 
 type DialogsPropsType = {
-    state: DialogsPageType
-    // addNewPeopleMassages: () => void
-    // newPeopleMessage: string
-    // updateNewPeopleText: (newPeopleText:string) => void
-    dispatch: (action: ActionsType) => void
+    addNewPeopleMassages: () => void
+    updateNewPeopleText: (newPeopleText:string) => void
+    dialogsPage: DialogsPageType
 }
 
 const Dialogs = (props: DialogsPropsType) => {
-debugger
-    let messageElements = props.state.messages.map(m => <Message message={m.message} id={m.id}/>)
-    let dialogsElements = props.state.dialogs.map(d => <DialogItem avatar={d.avatar} name={d.name} id={d.id}/>);
+    let state = props.dialogsPage
 
+    let messageElements = state.messages.map(m => <Message message={m.message} id={m.id}/>)
+    let dialogsElements = state.dialogs.map(d => <DialogItem avatar={d.avatar} name={d.name} id={d.id}/>);
 
     let addNewPeopleMassages = () => {
-        props.dispatch (addNewPeopleMessagesAC(props.state.newPeopleMessage));
+        props.addNewPeopleMassages();
     }
 
     let onChangePeopleText =  (e: ChangeEvent<HTMLTextAreaElement>) => {
         let text = e.currentTarget.value;
-        props.dispatch (updateNewPeopleTextAC(text))
+        props.updateNewPeopleText(text)
     }
 
     return (
@@ -38,7 +35,7 @@ debugger
             </div>
             <div>
                 <textarea
-                value={props.state.newPeopleMessage}
+                value={state.newPeopleMessage}
                 onChange={onChangePeopleText}
                 />
             </div>

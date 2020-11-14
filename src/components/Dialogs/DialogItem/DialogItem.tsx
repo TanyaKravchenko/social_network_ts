@@ -4,7 +4,6 @@ import {NavLink} from 'react-router-dom';
 import {DialogItemType} from '../../redux/store';
 
 const DialogItem = (props: DialogItemType) => {
-    debugger
     let path = '/dialogs/' + props.id
     return (
         <div className={classes.dialogItem}>
