@@ -10,22 +10,23 @@ import Settings from './components/Settings/Settings';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import {StoreType} from './components/redux/store';
 
-type AppType = {
-    store: any
-}
+// type AppType = {
+//     store: StoreType
+//
+// }
 
-const App = (props: AppType) => {
+const App = (/*props: AppType*/) => {
     return (
         <div className="app-wrapper">
             <Header/>
-            <Navbar state={props.store.getState().sidebar}/>
+            {/*<Navbar state={props.store.getState().sidebar}/>*/}
+            <Navbar />
             <div className='app-wrapper-content'>
                 <Route path='/profile' render={() =>
-                    <Profile store={props.store}/>}
+                    <Profile />}
                 />
                 <Route path='/dialogs' render={() =>
                     <DialogsContainer
-                        store={props.store}
                     />}
                 />
                 <Route path='/news' component={News}/>

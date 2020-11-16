@@ -42,18 +42,17 @@ const dialogsReducer = (state = initialState, action: ActionsType) => {
             }
             state.messages.push(newMessage);
             state.newPeopleMessage = '';
-            return state;
+            return {...state};
         case UPDATE_NEW_PEOPLE_TEXT:
             state.newPeopleMessage = action.newPeopleText;
-            return state;
+            return {...state};
         default:
             return state
     }
 }
-export const addNewPeopleMessagesAC = (newPeopleMessage: string) => {
+export const addNewPeopleMessagesAC = () => {
     return {
         type: ADD_NEW_PEOPLE_MESSAGES,
-        newPeopleMessage: newPeopleMessage
     } as const
 }
 

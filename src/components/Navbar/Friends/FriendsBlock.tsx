@@ -2,7 +2,6 @@ import React from 'react';
 import {FriendBlockType} from '../../redux/store';
 import FriendBlock from './FriendBlock';
 import classes from './FriendsBlock.module.css';
-import {NavLink} from 'react-router-dom';
 
 type FriendsBlockType = {
     friendsName: Array<FriendBlockType>

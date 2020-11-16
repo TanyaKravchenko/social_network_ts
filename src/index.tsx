@@ -5,16 +5,22 @@ import store from './components/redux/redux-store';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 import App from './App';
-import {StateType} from './components/redux/store';
+import {DialogsPageType, ProfilePageType, StateType} from './components/redux/store';
+import {Provider} from 'react-redux';
+
+export type StoreStateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+}
 
 export let rerenderEntireTree = (state: StateType) => {
     debugger
     ReactDOM.render(
         <BrowserRouter>
             <React.StrictMode>
-                <App
-                    store={store}
-                />
+                <Provider store={store}>
+                    <App/>
+                </Provider>
             </React.StrictMode>
         </BrowserRouter>,
         document.getElementById('root')
