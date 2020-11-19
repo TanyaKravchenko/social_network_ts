@@ -1,6 +1,5 @@
 import React from 'react';
 import classes from './FriendsBlock.module.css'
-import friend_image from '../../../images/avatar5.jpg';
 import {FriendBlockType} from '../../redux/store';
 import {NavLink} from 'react-router-dom';
 

@@ -24,17 +24,23 @@ const profileReducer = (state = initialState, action: ActionsType) => {
                 message: state.newPostText,
                 likesCount: 0
             }
-            state.posts.push(newPost);
-            state.newPostText = '';
-            return {...state}
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            return {...state}
+            return {
+                ...state,
+                newPostText: '',
+                posts: [...state.posts, newPost] // вместо stateCopy.posts = [...state.posts]; stateCopy.posts.push(newPost);
+            };
+
+        case UPDATE_NEW_POST_TEXT: {
+            return {
+                ...state,
+                newPostText: action.newText
+            };
+        }
         default:
             return state;
     }
 }
-export const addPostAC= (postText: string) => {
+export const addPostAC = (postText: string) => {
     return {
         type: ADD_POST,
         newPostText: postText

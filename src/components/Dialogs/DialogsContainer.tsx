@@ -3,9 +3,8 @@ import {addNewPeopleMessagesAC, updateNewPeopleTextAC} from '../redux/dialogs-re
 import Dialogs from './Dialogs';
 import {ActionsType, StateType} from '../redux/store';
 import {connect} from 'react-redux';
-import {StoreStateType} from '../../index';
 
-let  mapStateToProps =(state: StoreStateType) => {
+let  mapStateToProps =(state: StateType) => {
     return{
         dialogsPage: state.dialogsPage
     }

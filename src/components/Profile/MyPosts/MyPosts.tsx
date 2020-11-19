@@ -13,7 +13,7 @@ type MyPostsPropsType = {
 const MyPosts = (props: MyPostsPropsType) => {
 
     let postsElements = props.posts
-        .map(post => <Post message={post.message} id={post.id} likesCount={post.likesCount}/>)
+        .map(post => <Post key={post.id} message={post.message} id={post.id} likesCount={post.likesCount}/>)
 
     let onAddPost = (newPostText: any) => {
         props.onAddPost(newPostText);

@@ -8,7 +8,7 @@ type FriendsBlockType = {
 }
 
 const FriendsBlock = (props: FriendsBlockType) => {
-    let friendsElements = props.friendsName.map(f => <FriendBlock avatar={f.avatar} friendName={f.friendName} id={f.id}/>)
+    let friendsElements = props.friendsName.map(f => <FriendBlock key={f.id} avatar={f.avatar} friendName={f.friendName} id={f.id}/>)
 
     return (
         <div>
