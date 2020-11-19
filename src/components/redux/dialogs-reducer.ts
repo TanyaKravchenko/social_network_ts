@@ -9,7 +9,7 @@ import src6 from '../../images/avatar2.jpg';
 const ADD_NEW_PEOPLE_MESSAGES = 'ADD-NEW-PEOPLE-MESSAGES';
 const UPDATE_NEW_PEOPLE_TEXT = 'UPDATE-NEW-PEOPLE-TEXT';
 
-export type ActionsType =
+export type DialogsActionsType =
     | ReturnType<typeof addNewPeopleMessagesAC>
     | ReturnType<typeof updateNewPeopleTextAC>
 
@@ -33,7 +33,7 @@ let initialState = {
     newPeopleMessage: 'Hello'
 };
 
-const dialogsReducer = (state = initialState, action: ActionsType) => {
+const dialogsReducer = (state = initialState, action: DialogsActionsType) => {
     switch (action.type) {
         case ADD_NEW_PEOPLE_MESSAGES:
             const newMessage: MessageType = {

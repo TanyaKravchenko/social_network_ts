@@ -1,7 +1,7 @@
 import React from 'react';
-import {addNewPeopleMessagesAC, updateNewPeopleTextAC} from '../redux/dialogs-reducer';
+import {addNewPeopleMessagesAC, updateNewPeopleTextAC, DialogsActionsType} from '../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
-import {ActionsType, StateType} from '../redux/store';
+import {StateType} from '../redux/store';
 import {connect} from 'react-redux';
 
 let  mapStateToProps =(state: StateType) => {
@@ -9,7 +9,7 @@ let  mapStateToProps =(state: StateType) => {
         dialogsPage: state.dialogsPage
     }
 }
-let  mapDispatchToProps =(dispatch: (action: ActionsType) => void) => {
+let  mapDispatchToProps =(dispatch: (action: DialogsActionsType) => void) => {
     return {
         updateNewPeopleText: (newPeopleText: string) => {
             dispatch(updateNewPeopleTextAC(newPeopleText));

@@ -7,6 +7,7 @@ import src3 from '../../images/avatar4.jpeg';
 import src4 from '../../images/avatar1.png';
 import src5 from '../../images/avatar6.jpg';
 import src6 from '../../images/avatar2.jpg';
+import { v1 } from 'uuid';
 
 export type PostType = {
     id: number
@@ -46,10 +47,29 @@ export type SideBarType = {
     friendsBlock: Array<FriendBlockType>
 }
 
+export type LocationType = {
+    city: string
+    country: string
+}
+
+export type UserType = {
+    id: string
+    avatar: string
+    followed: boolean
+    fullName: string
+    status: string
+    location: LocationType
+}
+
+export type UsersType = {
+    users: Array<UserType>
+}
+
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SideBarType
+    usersPage: UsersType
 }
 
 export type ActionsType =
@@ -100,6 +120,42 @@ let store: StoreType = {
                 {id: 1, friendName: 'Kostya', avatar: src1},
                 {id: 2, friendName: 'Masha', avatar: src2},
                 {id: 3, friendName: 'Misha', avatar: src3}
+            ]
+        },
+        usersPage: {
+            users: [
+                {
+                    id: v1(),
+                    avatar: src1,
+                    followed: true,
+                    fullName: 'Dmitry',
+                    status: 'I am a boss.',
+                    location: {city: 'Minsk', country: 'Belarus'}
+                },
+                {
+                    id: v1(),
+                    avatar: src2,
+                    followed: true,
+                    fullName: 'Sveta',
+                    status: 'Hello!!!',
+                    location: {city: 'Minsk', country: 'Belarus'}
+                },
+                {
+                    id: v1(),
+                    avatar: src3,
+                    followed: false,
+                    fullName: 'Ignat',
+                    status: 'Yo!!',
+                    location: {city: 'Kiev', country: 'Ukraine'}
+                },
+                {
+                    id: v1(),
+                    avatar: src4,
+                    followed: false,
+                    fullName: 'Valera',
+                    status: 'I am fine!',
+                    location: {city: 'Bialystok', country: 'Poland'}
+                },
             ]
         }
     },
