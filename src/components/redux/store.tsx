@@ -54,9 +54,9 @@ export type LocationType = {
 
 export type UserType = {
     id: string
-    avatar: string
+    photos: string
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: LocationType
 }
@@ -126,33 +126,33 @@ let store: StoreType = {
             users: [
                 {
                     id: v1(),
-                    avatar: src1,
+                    photos: src1,
                     followed: true,
-                    fullName: 'Dmitry',
+                    name: 'Dmitry',
                     status: 'I am a boss.',
                     location: {city: 'Minsk', country: 'Belarus'}
                 },
                 {
                     id: v1(),
-                    avatar: src2,
+                    photos: src2,
                     followed: true,
-                    fullName: 'Sveta',
+                    name: 'Sveta',
                     status: 'Hello!!!',
                     location: {city: 'Minsk', country: 'Belarus'}
                 },
                 {
                     id: v1(),
-                    avatar: src3,
+                    photos: src3,
                     followed: false,
-                    fullName: 'Ignat',
+                    name: 'Ignat',
                     status: 'Yo!!',
                     location: {city: 'Kiev', country: 'Ukraine'}
                 },
                 {
                     id: v1(),
-                    avatar: src4,
+                    photos: src4,
                     followed: false,
-                    fullName: 'Valera',
+                    name: 'Valera',
                     status: 'I am fine!',
                     location: {city: 'Bialystok', country: 'Poland'}
                 },

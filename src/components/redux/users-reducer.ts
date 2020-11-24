@@ -1,9 +1,3 @@
-import { v1 } from "uuid";
-import src1 from '../../images/avatar3.jpg';
-import src2 from '../../images/avatar5.jpg';
-import src3 from '../../images/avatar4.jpeg';
-import src4 from '../../images/avatar1.png';
-
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -15,9 +9,9 @@ export type LocationType = {
 
 export type UserType = {
     id: string
-    avatar: string
+    photos: any
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: LocationType
 }
