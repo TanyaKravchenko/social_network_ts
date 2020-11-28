@@ -62,7 +62,10 @@ export type UserType = {
 }
 
 export type UsersType = {
-    users: Array<UserType>
+    users: Array<UserType>,
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 export type StateType = {
@@ -156,7 +159,10 @@ let store: StoreType = {
                     status: 'I am fine!',
                     location: {city: 'Bialystok', country: 'Poland'}
                 },
-            ]
+            ],
+            pageSize: 5,
+            totalUsersCount: 0,
+            currentPage: 1
         }
     },
     _callSubscriber() {

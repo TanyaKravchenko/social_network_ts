@@ -4,3 +4,7 @@
     border-radius: 50px;
     margin: 10px;
 }
+
+.selectedPage {
+    font-weight: bold;
+}
