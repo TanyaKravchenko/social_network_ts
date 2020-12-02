@@ -66,6 +66,7 @@ export type UsersType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 export type StateType = {
@@ -162,7 +163,8 @@ let store: StoreType = {
             ],
             pageSize: 5,
             totalUsersCount: 0,
-            currentPage: 1
+            currentPage: 1,
+            isFetching: false
         }
     },
     _callSubscriber() {

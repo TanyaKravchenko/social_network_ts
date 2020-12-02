@@ -1,9 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StateType} from '../redux/store';
-import {followAC, setCurrentPageAC, setUsersAC, unfollowAC, UsersActionsType, UserType, setTotalUsersCountAC} from '../redux/users-reducer';
+import {
+    followAC,
+    setCurrentPageAC,
+    setUsersAC,
+    unfollowAC,
+    UsersActionsType,
+    UserType,
+    setTotalUsersCountAC,
+    UsersType, toggleIsFetchingAC
+} from '../redux/users-reducer';
 import axios from 'axios';
 import Users from './Users';
+import preloader from '../../images/loader.gif';
+import Preloader from '../Preloader/Preloader';
 
 type UsersContainerPropsType = {
     users: Array<UserType>
@@ -15,12 +25,20 @@ type UsersContainerPropsType = {
     currentPage: number
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
+    isFetching: boolean
+    toggleIsFetching: (isFetching: boolean) => void
+}
+
+type UsersPageType = {
+    usersPage: UsersType
 }
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
+        this.props.toggleIsFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
+                this.props.toggleIsFetching(false);
                 this.props.setUsers(response.data.items);
                 this.props.setTotalUsersCount(response.data.totalCount);
             });
@@ -28,35 +46,41 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
+        this.props.toggleIsFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
             .then(response => {
+                this.props.toggleIsFetching(false)
                 this.props.setUsers(response.data.items)
             });
     }
 
     render() {
 
-        return <Users
-            users={this.props.users}
-            onPageChanged={this.onPageChanged}
-            unfollow={this.props.unfollow}
-            follow={this.props.follow}
-            setUsers={this.props.setUsers}
-            totalUsersCount={this.props.totalUsersCount}
-            pageSize={this.props.pageSize}
-            currentPage={this.props.currentPage}
-            setCurrentPage={this.props.setCurrentPage}
-            setTotalUsersCount={this.props.setTotalUsersCount}
-        />
+        return <>
+            {this.props.isFetching ? <Preloader /> : null}
+            <Users
+                users={this.props.users}
+                onPageChanged={this.onPageChanged}
+                unfollow={this.props.unfollow}
+                follow={this.props.follow}
+                setUsers={this.props.setUsers}
+                totalUsersCount={this.props.totalUsersCount}
+                pageSize={this.props.pageSize}
+                currentPage={this.props.currentPage}
+                setCurrentPage={this.props.setCurrentPage}
+                setTotalUsersCount={this.props.setTotalUsersCount}
+            />
+            </>
     }
 }
 
-let mapStateToProps = (state: StateType) => {
+let mapStateToProps = (state: UsersPageType) => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
     }
 }
 let mapDispatchToProps = (dispatch: (action: UsersActionsType) => void) => {
@@ -75,6 +99,9 @@ let mapDispatchToProps = (dispatch: (action: UsersActionsType) => void) => {
         },
         setTotalUsersCount: (totalCount: number) => {
             dispatch(setTotalUsersCountAC(totalCount))
+        },
+        toggleIsFetching: (isFetching: boolean) => {
+            dispatch(toggleIsFetchingAC(isFetching))
         }
     }
 }
