@@ -1,6 +1,5 @@
 import React from 'react';
-import {FriendBlockType} from '../../redux/store';
-import FriendBlock from './FriendBlock';
+import FriendBlock, {FriendBlockType} from './FriendBlock';
 import classes from './FriendsBlock.module.css';
 
 type FriendsBlockType = {

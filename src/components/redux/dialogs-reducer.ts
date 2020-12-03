@@ -49,7 +49,7 @@ let initialState: DialogsStateType = {
     newPeopleMessage: 'Hello'
 };
 
-const dialogsReducer = (state = initialState, action: DialogsActionsType) => {
+const dialogsReducer = (state = initialState, action: DialogsActionsType): DialogsStateType=> {
     switch (action.type) {
         case ADD_NEW_PEOPLE_MESSAGES:
             const newMessage: MessageType = {

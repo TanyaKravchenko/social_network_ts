@@ -1,9 +1,8 @@
-import React from 'react';
-import {StateType} from '../../redux/store';
 import {connect} from 'react-redux';
 import FriendsBlock from './FriendsBlock';
+import {RootState} from '../../redux/redux-store';
 
-let mapStateToProps = (state: StateType) => {
+let mapStateToProps = (state: RootState) => {
     return {
         friendsName: state.sidebar.friendsBlock
     }

@@ -1,17 +1,12 @@
-import React from 'react';
 import {
     addNewPeopleMessages,
     updateNewPeopleText,
-    DialogsStateType,
 } from '../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import {connect} from 'react-redux';
+import {RootState} from '../redux/redux-store';
 
-type DialogsType = {
-    dialogsPage: DialogsStateType
-}
-
-let  mapStateToProps =(state: DialogsType) => {
+let  mapStateToProps =(state: RootState) => {
     return{
         dialogsPage: state.dialogsPage
     }
@@ -21,6 +16,8 @@ const DialogsContainer = connect(mapStateToProps,
     {updateNewPeopleText, addNewPeopleMessages})(Dialogs);
 
 export default DialogsContainer;
+
+
 
 // let  mapDispatchToProps =(dispatch: (action: DialogsActionsType) => void) => {
 //     return {
