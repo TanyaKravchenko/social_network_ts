@@ -1,28 +1,39 @@
 import React from 'react';
-import {addNewPeopleMessagesAC, updateNewPeopleTextAC, DialogsActionsType} from '../redux/dialogs-reducer';
+import {
+    addNewPeopleMessages,
+    updateNewPeopleText,
+    DialogsStateType,
+} from '../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
-import {StateType} from '../redux/store';
 import {connect} from 'react-redux';
 
-let  mapStateToProps =(state: StateType) => {
+type DialogsType = {
+    dialogsPage: DialogsStateType
+}
+
+let  mapStateToProps =(state: DialogsType) => {
     return{
         dialogsPage: state.dialogsPage
     }
 }
-let  mapDispatchToProps =(dispatch: (action: DialogsActionsType) => void) => {
-    return {
-        updateNewPeopleText: (newPeopleText: string) => {
-            dispatch(updateNewPeopleTextAC(newPeopleText));
-        },
-        addNewPeopleMassages: () => {
-            dispatch(addNewPeopleMessagesAC());
-        }
-    }
-}
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+const DialogsContainer = connect(mapStateToProps,
+    {updateNewPeopleText, addNewPeopleMessages})(Dialogs);
 
 export default DialogsContainer;
+
+// let  mapDispatchToProps =(dispatch: (action: DialogsActionsType) => void) => {
+//     return {
+//         updateNewPeopleText: (newPeopleText: string) => {
+//             dispatch(updateNewPeopleText(newPeopleText));
+//         },
+//         addNewPeopleMessages: () => {
+//             dispatch(addNewPeopleMessages());
+//         }
+//     }
+// }
+
+//const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
 // type DialogsPropsType = {
 //     store: StoreType

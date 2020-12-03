@@ -1,4 +1,3 @@
-import {MessageType} from './store';
 import src1 from '../../images/avatar3.jpg';
 import src2 from '../../images/avatar5.jpg';
 import src3 from '../../images/avatar4.jpeg';
@@ -10,10 +9,27 @@ const ADD_NEW_PEOPLE_MESSAGES = 'ADD-NEW-PEOPLE-MESSAGES';
 const UPDATE_NEW_PEOPLE_TEXT = 'UPDATE-NEW-PEOPLE-TEXT';
 
 export type DialogsActionsType =
-    | ReturnType<typeof addNewPeopleMessagesAC>
-    | ReturnType<typeof updateNewPeopleTextAC>
+    | ReturnType<typeof addNewPeopleMessages>
+    | ReturnType<typeof updateNewPeopleText>
 
-let initialState = {
+export type DialogItemType = {
+    id: number
+    name: string
+    avatar: string
+}
+
+export type MessageType = {
+    id: number
+    message: string
+}
+
+export type DialogsStateType = {
+    dialogs: Array<DialogItemType>
+    messages: Array<MessageType>
+    newPeopleMessage: string
+}
+
+let initialState: DialogsStateType = {
     dialogs: [
         {id: 1, name: 'Dimych', avatar: src1},
         {id: 2, name: 'Sveta', avatar: src2},
@@ -54,13 +70,13 @@ const dialogsReducer = (state = initialState, action: DialogsActionsType) => {
             return state
     }
 }
-export const addNewPeopleMessagesAC = () => {
+export const addNewPeopleMessages = () => {
     return {
         type: ADD_NEW_PEOPLE_MESSAGES,
     } as const
 }
 
-export const updateNewPeopleTextAC = (newPeopleText: string) => {
+export const updateNewPeopleText = (newPeopleText: string) => {
     return {
         type: UPDATE_NEW_PEOPLE_TEXT,
         newPeopleText: newPeopleText

@@ -1,22 +1,61 @@
-import {PostType} from './store';
-
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+
+export type PostType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+type ContactType = {
+    facebook: string | null
+    website: string | null
+    vk: string | null
+    twitter: string | null
+    instagram: string | null
+    youtube: string | null
+    github: string | null
+    mainLink: string | null
+}
+
+type PhotosType = {
+    small: string
+    large: string
+}
+
+export type ProfileType = {
+    aboutMe: string
+    contacts: ContactType
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: string
+    photos: PhotosType
+}
+
+export type ProfileStateType = {
+    posts: Array<PostType>
+    newPostText: string
+    profile: ProfileType | null
+}
 
 export type ProfileActionsType =
-    | ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostTextAC>
+    | ReturnType<typeof onAddPost>
+    | ReturnType<typeof updateNewPostText>
+    | ReturnType<typeof setUserProfile>
 
 
-let initialState = {
+let initialState: ProfileStateType = {
     posts: [
         {id: 1, message: 'Hello!', likesCount: 15},
         {id: 2, message: 'How are you?', likesCount: 25},
     ],
-    newPostText: 'Bla-Bla'
+    newPostText: 'Bla-Bla',
+    profile: null
 };
 
-const profileReducer = (state = initialState, action: ProfileActionsType) => {
+const profileReducer = (state = initialState, action: ProfileActionsType): ProfileStateType => {
     switch (action.type) {
         case ADD_POST:
             const newPost: PostType = {
@@ -36,21 +75,34 @@ const profileReducer = (state = initialState, action: ProfileActionsType) => {
                 newPostText: action.newText
             };
         }
+        case SET_USER_PROFILE: {
+            return {
+                ...state,
+                profile: action.profile
+            };
+        }
         default:
             return state;
     }
 }
-export const addPostAC = (postText: string) => {
+export const onAddPost = (postText: string) => {
     return {
         type: ADD_POST,
         newPostText: postText
     } as const
 }
 
-export const updateNewPostTextAC = (newText: string) => {
+export const updateNewPostText = (newText: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: newText
+    } as const
+}
+
+export const setUserProfile = (profile: ProfileType) => {
+    return {
+        type: SET_USER_PROFILE,
+        profile
     } as const
 }
 

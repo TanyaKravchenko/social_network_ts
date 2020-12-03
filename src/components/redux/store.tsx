@@ -1,5 +1,5 @@
-import profileReducer, {addPostAC, updateNewPostTextAC} from './profile-reducer';
-import dialogsReducer, {addNewPeopleMessagesAC, updateNewPeopleTextAC} from './dialogs-reducer';
+import profileReducer, {onAddPost, updateNewPostText} from './profile-reducer';
+import dialogsReducer, {addNewPeopleMessages, updateNewPeopleText} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
 import src1 from '../../images/avatar3.jpg';
 import src2 from '../../images/avatar5.jpg';
@@ -77,10 +77,10 @@ export type StateType = {
 }
 
 export type ActionsType =
-    | ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostTextAC>
-    | ReturnType<typeof addNewPeopleMessagesAC>
-    | ReturnType<typeof updateNewPeopleTextAC>
+    | ReturnType<typeof onAddPost>
+    | ReturnType<typeof updateNewPostText>
+    | ReturnType<typeof addNewPeopleMessages>
+    | ReturnType<typeof updateNewPeopleText>
 
 export type StoreType = {
     _state: StateType
