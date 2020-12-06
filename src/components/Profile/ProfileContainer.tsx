@@ -13,8 +13,7 @@ type mapStateToPropsType = {
 type mapDispatchToPropsType = {
     setUserProfile: (profile: ProfileType) => void
 }
-
-export type OwnProps = mapStateToPropsType & mapDispatchToPropsType;
+type OwnProps = mapStateToPropsType & mapDispatchToPropsType;
 
 type PathParamsType = {
     userId: string

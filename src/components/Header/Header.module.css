@@ -3,7 +3,35 @@
     background: url('../../images/Wooden_texture.jpg')
 }
 
+.headerContainer {
+    display: flex;
+    align-items: center;
+}
+
+.headerTop {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    padding-right: 20px;
+}
+
 .header img {
     width: 130px;
     padding: 15px;
+}
+
+.loginBlock {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    color: goldenrod;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.loginBlock a {
+    color: beige;
+    font-weight: bold;
+    font-size: 24px;
+    text-decoration: none;
 }
