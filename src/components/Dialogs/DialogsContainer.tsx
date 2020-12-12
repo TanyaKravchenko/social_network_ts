@@ -8,7 +8,8 @@ import {RootState} from '../redux/redux-store';
 
 let  mapStateToProps =(state: RootState) => {
     return{
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 
