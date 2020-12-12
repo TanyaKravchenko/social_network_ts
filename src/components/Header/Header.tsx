@@ -8,7 +8,7 @@ export type MapPropsToType = {
 }
 
 export type DispatchToPropsType = {
-    setAuthUserData: (id: number | null, email: string | null, login: string | null, isAuth: boolean) => void
+    getAuthUserData: () => void
 }
 
 const Header: React.FC<MapPropsToType & DispatchToPropsType> = (props) => {

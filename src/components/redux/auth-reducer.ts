@@ -1,3 +1,6 @@
+import {AuthAPI} from '../../api/api';
+import {Dispatch} from 'react';
+
 const SET_USER_DATA = 'SET_USER_DATA';
 
 export type AuthType = {
@@ -36,4 +39,13 @@ export const setAuthUserData = (userId: number | null, email: string | null, log
     } as const
 }
 
+export const getAuthUserData = () => (dispatch: Dispatch<AuthActionsType>) => {
+    AuthAPI.me()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                let {id, email, login, isAuth} = response.data.data
+                dispatch(setAuthUserData(id, email, login, isAuth));
+            }
+        });
+}
 export default authReducer;
