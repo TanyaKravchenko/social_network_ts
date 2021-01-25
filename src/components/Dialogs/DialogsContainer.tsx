@@ -1,22 +1,26 @@
 import {
-    addNewPeopleMessages,
+    addNewPeopleMessages, DialogsStateType,
     updateNewPeopleText,
 } from '../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import {connect} from 'react-redux';
 import {RootState} from '../redux/redux-store';
+import React from 'react';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
-let  mapStateToProps =(state: RootState) => {
+type mapStateToPropsType = {
+    dialogsPage: DialogsStateType | null
+}
+
+let  mapStateToProps =(state: RootState): mapStateToPropsType => {
     return{
-        dialogsPage: state.dialogsPage,
-        isAuth: state.auth.isAuth
+        dialogsPage: state.dialogsPage
     }
 }
 
-const DialogsContainer = connect(mapStateToProps,
-    {updateNewPeopleText, addNewPeopleMessages})(Dialogs);
-
-export default DialogsContainer;
+export default compose<React.ComponentType>(connect(mapStateToProps,
+    {updateNewPeopleText, addNewPeopleMessages}), withAuthRedirect)(Dialogs);
 
 
 

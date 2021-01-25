@@ -9,6 +9,8 @@ import {
 import Users from './Users';
 import Preloader from '../Preloader/Preloader';
 import {RootState} from '../redux/redux-store';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+import {compose} from 'redux';
 
 type UsersContainerPropsType = {
     users: Array<UserType>
@@ -62,13 +64,13 @@ let mapStateToProps = (state: RootState) => {
     }
 }
 
-export default connect(mapStateToProps, {
+export default compose(withAuthRedirect, connect(mapStateToProps, {
     follow,
     unfollow,
     setCurrentPage,
     toggleFollowingProgress,
     getUsers
-})(UsersContainer);
+}))(UsersContainer);
 
 
 // let mapDispatchToProps = (dispatch: (action: UsersActionsType) => void) => {

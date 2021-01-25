@@ -3,6 +3,7 @@ import classes from './ProfileInfo.module.css';
 import profile_image from '../../../images/profile_image.jpg'
 import Preloader from '../../Preloader/Preloader';
 import {ProfileType} from '../../redux/profile-reducer';
+import ProfileStatus from './ProfileStatus'
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
@@ -22,7 +23,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                 <div>{props.profile.fullName}</div>
                 <div>{props.profile.aboutMe}</div>
                 <div>{props.profile.contacts.vk}</div>
-
+                <ProfileStatus status={'Hello'}/>
             </div>
         </div>
     );
