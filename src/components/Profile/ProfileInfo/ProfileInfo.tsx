@@ -4,12 +4,14 @@ import profile_image from '../../../images/profile_image.jpg'
 import Preloader from '../../Preloader/Preloader';
 import {ProfileType} from '../../redux/profile-reducer';
 import ProfileStatus from './ProfileStatus'
+import {updateStatusPropsType} from '../ProfileContainer';
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
+    status: string
 }
 
-const ProfileInfo = (props: ProfileInfoPropsType) => {
+const ProfileInfo = (props: ProfileInfoPropsType & updateStatusPropsType) => {
     if (!props.profile) {
         return <Preloader/>
     }
@@ -23,8 +25,8 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                 <div>{props.profile.fullName}</div>
                 <div>{props.profile.aboutMe}</div>
                 <div>{props.profile.contacts.vk}</div>
-                <ProfileStatus status={'Hello'}/>
             </div>
+            <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
         </div>
     );
 }
