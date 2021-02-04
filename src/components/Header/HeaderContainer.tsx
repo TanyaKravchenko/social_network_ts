@@ -1,8 +1,8 @@
 import React from 'react';
 import Header, {DispatchToPropsType, MapPropsToType} from './Header';
 import {connect} from 'react-redux';
-import {RootState} from '../redux/redux-store';
-import {getAuthUserData} from '../redux/auth-reducer';
+import {AppStateType, RootState} from '../../redux/redux-store';
+import {getAuthUserData} from '../../redux/auth-reducer';
 
 class HeaderContainer extends React.Component<MapPropsToType & DispatchToPropsType> {
     componentDidMount() {
@@ -24,7 +24,7 @@ class HeaderContainer extends React.Component<MapPropsToType & DispatchToPropsTy
     }
 }
 
-const mapStateToProps = (state: RootState) => ({
+const mapStateToProps = (state: AppStateType) => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login
 })

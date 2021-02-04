@@ -1,4 +1,4 @@
-import {AuthAPI} from '../../api/api';
+import {AuthAPI} from '../api/api';
 import {Dispatch} from 'react';
 
 const SET_USER_DATA = 'SET_USER_DATA';

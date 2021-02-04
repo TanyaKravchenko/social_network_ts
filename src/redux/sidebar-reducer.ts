@@ -1,7 +1,7 @@
-import {ActionsType} from './store';
-import src1 from '../../images/avatar3.jpg';
-import src2 from '../../images/avatar5.jpg';
-import src3 from '../../images/avatar4.jpeg';
+import src1 from '../images/avatar3.jpg';
+import src2 from '../images/avatar5.jpg';
+import src3 from '../images/avatar4.jpeg';
+import {ActionsType} from './dialogs-reducer';
 
 let initialState = {
     friendsBlock: [

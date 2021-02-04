@@ -1,28 +1,26 @@
-import {
-    addNewPeopleMessages, DialogsStateType,
-    updateNewPeopleText,
-} from '../redux/dialogs-reducer';
+import {actions} from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import {connect} from 'react-redux';
-import {RootState} from '../redux/redux-store';
+import {AppStateType} from '../../redux/redux-store';
 import React from 'react';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
-import { compose } from 'redux';
+import {compose} from 'redux';
 
-type mapStateToPropsType = {
-    dialogsPage: DialogsStateType | null
-}
-
-let  mapStateToProps =(state: RootState): mapStateToPropsType => {
-    return{
+let mapStateToProps = (state: AppStateType) => {
+    return {
         dialogsPage: state.dialogsPage
     }
 }
 
 export default compose<React.ComponentType>(connect(mapStateToProps,
-    {updateNewPeopleText, addNewPeopleMessages}), withAuthRedirect)(Dialogs);
+    {...actions}), withAuthRedirect)(Dialogs);
 
 
+
+//mapDispatchToProps можно так сразу писать:
+// export default compose<React.ComponentType>(connect(mapStateToProps,
+//     {updateNewPeopleText, addNewPeopleMessages}), withAuthRedirect)(Dialogs);
+//-------------------------
 
 // let  mapDispatchToProps =(dispatch: (action: DialogsActionsType) => void) => {
 //     return {

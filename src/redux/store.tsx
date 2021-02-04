@@ -1,13 +1,12 @@
-import profileReducer, {onAddPost, updateNewPostText} from './profile-reducer';
-import dialogsReducer, {addNewPeopleMessages, updateNewPeopleText} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
-import src1 from '../../images/avatar3.jpg';
-import src2 from '../../images/avatar5.jpg';
-import src3 from '../../images/avatar4.jpeg';
-import src4 from '../../images/avatar1.png';
-import src5 from '../../images/avatar6.jpg';
-import src6 from '../../images/avatar2.jpg';
+import src1 from '../images/avatar3.jpg';
+import src2 from '../images/avatar5.jpg';
+import src3 from '../images/avatar4.jpeg';
+import src4 from '../images/avatar1.png';
+import src5 from '../images/avatar6.jpg';
+import src6 from '../images/avatar2.jpg';
 import { v1 } from 'uuid';
+import { ActionsType } from './dialogs-reducer';
 
 export type PostType = {
     id: number
@@ -76,11 +75,11 @@ export type StateType = {
     usersPage: UsersType
 }
 
-export type ActionsType =
-    | ReturnType<typeof onAddPost>
-    | ReturnType<typeof updateNewPostText>
-    | ReturnType<typeof addNewPeopleMessages>
-    | ReturnType<typeof updateNewPeopleText>
+// export type ActionsType =
+//     | ReturnType<typeof onAddPost>
+//     | ReturnType<typeof updateNewPostText>
+//     | ReturnType<typeof addNewPeopleMessages>
+//     //| ReturnType<typeof updateNewPeopleText>
 
 export type StoreType = {
     _state: StateType

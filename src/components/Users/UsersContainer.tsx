@@ -5,10 +5,10 @@ import {
     setCurrentPage,
     unfollow,
     UserType, toggleFollowingProgress, getUsers
-} from '../redux/users-reducer';
+} from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../Preloader/Preloader';
-import {RootState} from '../redux/redux-store';
+import {AppStateType} from '../../redux/redux-store';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
 
@@ -53,7 +53,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
     }
 }
 
-let mapStateToProps = (state: RootState) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,

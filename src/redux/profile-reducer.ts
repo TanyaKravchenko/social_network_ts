@@ -1,8 +1,9 @@
 import {Dispatch} from 'react';
-import {profileAPI, usersAPI} from '../../api/api';
+import {profileAPI, usersAPI} from '../api/api';
+import {InferActionsTypes, BaseThunkType} from './redux-store';
+import {FormAction} from 'redux-form';
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -38,50 +39,31 @@ export type ProfileType = {
     photos: PhotosType
 }
 
-export type ProfileStateType = {
-    posts: Array<PostType>
-    newPostText: string
-    profile: ProfileType | null
-    status: string
-}
+export type InitialStateType = typeof initialState
+type ActionsType = InferActionsTypes<typeof actions>
+type ThunkType = BaseThunkType<ActionsType | FormAction>
 
-export type ProfileActionsType =
-    | ReturnType<typeof onAddPost>
-    | ReturnType<typeof updateNewPostText>
-    | ReturnType<typeof setUserProfile>
-    | ReturnType<typeof setStatus>
-
-
-let initialState: ProfileStateType = {
+let initialState = {
     posts: [
         {id: 1, message: 'Hello!', likesCount: 15},
         {id: 2, message: 'How are you?', likesCount: 25},
-    ],
-    newPostText: 'Bla-Bla',
-    profile: null,
+    ] as Array<PostType>,
+    profile: null as ProfileType | null,
     status: ''
 };
 
-const profileReducer = (state = initialState, action: ProfileActionsType): ProfileStateType => {
+const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             const newPost: PostType = {
                 id: new Date().getTime(),
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0
             }
             return {
                 ...state,
-                newPostText: '',
                 posts: [...state.posts, newPost] // вместо stateCopy.posts = [...state.posts]; stateCopy.posts.push(newPost);
             };
-
-        case UPDATE_NEW_POST_TEXT: {
-            return {
-                ...state,
-                newPostText: action.newText
-            };
-        }
         case SET_STATUS: {
             return {
                 ...state,
@@ -98,50 +80,29 @@ const profileReducer = (state = initialState, action: ProfileActionsType): Profi
             return state;
     }
 }
-export const onAddPost = (postText: string) => {
-    return {
-        type: ADD_POST,
-        newPostText: postText
-    } as const
+
+export const actions = {
+    onAddPost: (postText: string) => ({type: ADD_POST, newPostText: postText} as const),
+    setUserProfile: (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const),
+    setStatus: (status: string) => ({type: SET_STATUS, status} as const),
 }
 
-export const updateNewPostText = (newText: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: newText
-    } as const
-}
-
-export const setUserProfile = (profile: ProfileType) => {
-    return {
-        type: SET_USER_PROFILE,
-        profile
-    } as const
-}
-
-export const setStatus = (status: string) => {
-    return {
-        type: SET_STATUS,
-        status
-    } as const
-}
-
-export const getUserProfile = (userId: string) => (dispatch: Dispatch<ProfileActionsType>) => {
+export const getUserProfile = (userId: string) => (dispatch: Dispatch<ActionsType>) => {
     usersAPI.getProfile(userId).then(response => {
-        dispatch(setUserProfile(response.data));
+        dispatch(actions.setUserProfile(response.data));
     });
 }
 
-export const getStatus = (userId: string) => (dispatch: Dispatch<ProfileActionsType>) => {
+export const getStatus = (userId: string) => (dispatch: Dispatch<ActionsType>) => {
     profileAPI.getStatus(userId).then(response => {
-        dispatch(setStatus(response.data));
+        dispatch(actions.setStatus(response.data));
     });
 }
 
-export const updateStatus = (status: string) => (dispatch: Dispatch<ProfileActionsType>) => {
+export const updateStatus = (status: string) => (dispatch: Dispatch<ActionsType>) => {
     profileAPI.updateStatus(status).then(response => {
         if (response.data.resultCode === 0) {
-            dispatch(setStatus(status));
+            dispatch(actions.setStatus(status));
         }
     });
 }
