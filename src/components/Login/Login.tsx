@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {AppStateType} from '../../redux/redux-store';
 import {login} from '../../redux/auth-reducer';
+import style from './../common/FormsControls/FormsControls.module.css'
 
 export type LoginFormValuesType = {
     //captcha: string
@@ -30,6 +31,7 @@ const LoginForm: React.FC<any> = (props)  => {
                 <Field
                     placeholder={'Password'}
                     name={'password'}
+                    type={'password'}
                     component={Input}
                     validate={[required]}
                 />
@@ -37,6 +39,10 @@ const LoginForm: React.FC<any> = (props)  => {
             <div>
                 <Field component={Input} name={'rememberMe'} type={'checkbox'}/> remember me
             </div>
+            {props.error && <div className={style.formSummaryError}>
+                {props.error}
+            </div>
+            }
             <div>
                 <button>Login</button>
             </div>

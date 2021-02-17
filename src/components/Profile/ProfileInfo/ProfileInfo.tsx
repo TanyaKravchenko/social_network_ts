@@ -4,15 +4,16 @@ import profile_image from '../../../images/profile_image.jpg'
 import Preloader from '../../common/Preloader/Preloader';
 import {ProfileType} from '../../../redux/profile-reducer';
 import ProfileStatus from './ProfileStatus'
-import {updateStatusPropsType} from '../ProfileContainer';
+//import {updateStatusPropsType} from '../ProfileContainer';
 import avatar from '../../../images/avatar3.jpg';
 
 type ProfileInfoPropsType = {
     profile: ProfileType | null
     status: string
+    updateStatus: (status: string) => void
 }
 
-const ProfileInfo = (props: ProfileInfoPropsType & updateStatusPropsType) => {
+const ProfileInfo = (props: ProfileInfoPropsType) => {
     if (!props.profile) {
         return <Preloader/>
     }

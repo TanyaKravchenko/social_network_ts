@@ -9,7 +9,6 @@ import {
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 import {AppStateType} from '../../redux/redux-store';
-import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
 
 type UsersContainerPropsType = {
@@ -22,7 +21,7 @@ type UsersContainerPropsType = {
     setCurrentPage: (pageNumber: number) => void
     isFetching: boolean
     toggleFollowingProgress: (isFetching: boolean, userId: string) => void
-    followingInProgress:Array<string>
+    followingInProgress: Array<string>
     getUsers: (currentPage: number, pageSize: number) => void
 }
 
@@ -37,7 +36,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
 
     render() {
         return <>
-            {this.props.isFetching ? <Preloader /> : null}
+            {this.props.isFetching ? <Preloader/> : null}
             <Users
                 users={this.props.users}
                 onPageChanged={this.onPageChanged}
@@ -49,7 +48,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
                 setCurrentPage={this.props.setCurrentPage}
                 followingInProgress={this.props.followingInProgress}
             />
-            </>
+        </>
     }
 }
 
@@ -64,13 +63,14 @@ let mapStateToProps = (state: AppStateType) => {
     }
 }
 
-export default compose(withAuthRedirect, connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setCurrentPage,
-    toggleFollowingProgress,
-    getUsers
-}))(UsersContainer);
+export default compose(
+    connect(mapStateToProps, {
+        follow,
+        unfollow,
+        setCurrentPage,
+        toggleFollowingProgress,
+        getUsers
+    }))(UsersContainer);
 
 
 // let mapDispatchToProps = (dispatch: (action: UsersActionsType) => void) => {
@@ -97,7 +97,6 @@ export default compose(withAuthRedirect, connect(mapStateToProps, {
 //}
 
 //export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
-
 
 
 // props.setUsers(

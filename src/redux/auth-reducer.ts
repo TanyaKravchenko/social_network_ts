@@ -2,6 +2,7 @@ import {AuthAPI} from '../api/api';
 import {Dispatch} from 'react';
 import { InferActionsTypes, BaseThunkType } from './redux-store';
 import { FormAction } from 'redux-form/lib/actions';
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -45,7 +46,7 @@ export const setAuthUserData = (userId: number | null, email: string | null, log
 }
 
 export const getAuthUserData = () => (dispatch: Dispatch<ActionsType>) => {
-    AuthAPI.me()
+   return AuthAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data
@@ -59,6 +60,9 @@ export const login = (email: string | null, password: string | null, rememberMe:
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getAuthUserData())
+            } else {
+                let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
+                dispatch(stopSubmit('login', {_error: message}));
             }
         });
 }
